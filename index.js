@@ -49,7 +49,7 @@ app.post('/webhook', express.json(), function (req, res) {
         // Verifica si la respuesta es exitosa (código de estado 200)
         if (response.status === 200) {
            let tramites = response.data;
-         let tramite = tramites[2];
+         let tramite = tramites[0];
            agent.add(`*id:* ${tramite.id} *nombre:* ${tramite.label} *stock:* ${tramite.stock_reel} `);
          
         } else {
