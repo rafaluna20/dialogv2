@@ -49,7 +49,7 @@ app.post('/webhook', express.json(), function (req, res) {
     console.log(tramites);
 
     if (tramites.length > 0) {
-      let tramite = tramites[0];
+      let tramite = tramites[1];
       agent.add("*nombre:*" + tramite.label );
       agent.add("*condigo:*" + tramite.id );
       agent.add("*condigo:*" + tramite.stock_reel +"unidades");
