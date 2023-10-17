@@ -42,20 +42,14 @@ app.post('/webhook', express.json(), function (req, res) {
 
 
   async function consultarTramite(agent) {
-    let numero01 = agent.parameters["consulta"];
+  let numero01 = agent.parameters["consulta"];
 
     let respuesta = await axios.get("https://api.apis.net.pe/v1/dni?numero=" + numero01)
     let tramites = respuesta;
     console.log(tramites);
 
-    if () {
-      let tramite = tramites[0];
-      agent.add("*nombre:*" + tramite.nombre );
-
-    } else {
-
-      agent.add(" el numero de dni invalido");
-    }
+      let tramite = tramites.nombre;
+      agent.add("*nombre:*" + tramite );
 
   }
 
