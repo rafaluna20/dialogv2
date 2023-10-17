@@ -42,14 +42,20 @@ app.post('/webhook', express.json(), function (req, res) {
 
 
   async function consultarTramite(agent) {
-  let numero01 = agent.parameters["consulta"];
+    let numero01 = agent.parameters["consulta"];
 
-    let respuesta = await axios.get("https://api.apis.net.pe/v1/dni?numero=" + numero01)
-    let tramites = respuesta;
+    let respuesta = await axios.get("https://erp.connasa.com/api/index.php/products/?DOLAPIKEY=4pJ0J6N80vxlIzGtd4xM9VbwDAZy6J78")
+    let tramites = respuesta.data;
     console.log(tramites);
 
-      let tramite = tramites.nombre;
-      agent.add("*nombre:*" + tramite );
+    if (tramites.length > 0) {
+      let tramite = tramites[0];
+      agent.add("nombre:" + tramite.label );
+
+    } else {
+
+      agent.add(" la fecha no existe");
+    }
 
   }
 
