@@ -50,10 +50,8 @@ app.post('/webhook', express.json(), function (req, res) {
         if (response.status === 200) {
            let tramites = response.data;
          let tramite = tramites[2];
-        agent.add(`*nombre:*`+tramite.label);
-          
-       agent.add(`*stock:*`+tramite.stock_reel);
-         
+        agent.add(`*nombre:* ${tramite.label}`);
+             
         } else {
           agent.add(" la llamada no se pudo completar correctamente");
         }
