@@ -45,19 +45,27 @@ app.post('/webhook', express.json(), function (req, res) {
     let numero01 = agent.parameters["consulta"];
 
     let respuesta = await axios.get("https://erp.connasa.com/api/index.php/products/?DOLAPIKEY=4pJ0J6N80vxlIzGtd4xM9VbwDAZy6J78")
-    let tramites = respuesta.data;
-    console.log(tramites);
-
-    if (tramites.length > 0) {
-      let tramite = tramites[1];
+      .then(response => {
+        // Verifica si la respuesta es exitosa (código de estado 200)
+        if (response.status === 200) {
+           let tramites = response.data;
+         let tramite = tramites[1];
       agent.add("*nombre:*" + tramite.label );
       agent.add("*condigo:*" + tramite.id );
       agent.add("*condigo:*" + tramite.stock_reel +"unidades");
+         
+        } else {
+          agent.add(" la llamada no se pudo completar correctamente");
+        }
+      })
+      .catch(error => {
+        
+ agent.add(" la fecha no existe");
+        
+      });
 
-    } else {
+    
 
-      agent.add(" la fecha no existe");
-    }
 
   }
 
