@@ -51,6 +51,8 @@ app.post('/webhook', express.json(), function (req, res) {
     if (tramites.length > 0) {
       let tramite = tramites[0];
       agent.add("nombre:" + tramite.label );
+      agent.add("*condigo:*" + tramite.id );
+      agent.add("*condigo:*" + tramite.stock_reel );
 
     } else {
 
