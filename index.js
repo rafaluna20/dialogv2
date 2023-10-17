@@ -44,17 +44,17 @@ app.post('/webhook', express.json(), function (req, res) {
   async function consultarTramite(agent) {
     let numero01 = agent.parameters["consulta"];
 
-    let respuesta = await axios.get("https://sheet.best/api/sheets/9a29dcff-633f-47b9-b260-be64d4323479/fecha/" + numero01)
-    let tramites = respuesta.data;
+    let respuesta = await axios.get("https://api.apis.net.pe/v1/dni?numero=" + numero01)
+    let tramites = respuesta;
     console.log(tramites);
 
-    if (tramites.length > 0) {
+    if () {
       let tramite = tramites[0];
       agent.add("*nombre:*" + tramite.nombre );
 
     } else {
 
-      agent.add(" la fecha no existe");
+      agent.add(" el numero de dni invalido");
     }
 
   }
